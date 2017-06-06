@@ -1,0 +1,2 @@
+from .DIKUDatabase import app
+

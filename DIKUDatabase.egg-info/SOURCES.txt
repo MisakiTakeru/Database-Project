@@ -1,0 +1,9 @@
+MANIFEST.in
+DIKUDatabase/DIKUDatabase.py
+DIKUDatabase/__init__.py
+DIKUDatabase/schema.sql
+DIKUDatabase.egg-info/PKG-INFO
+DIKUDatabase.egg-info/SOURCES.txt
+DIKUDatabase.egg-info/dependency_links.txt
+DIKUDatabase.egg-info/requires.txt
+DIKUDatabase.egg-info/top_level.txt

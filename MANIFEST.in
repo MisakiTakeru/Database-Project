@@ -1,0 +1,4 @@
+graft DIKUDatabase/templates
+graft DIKUDatabase/static
+include DIKUDatabase/schema.sql
+
