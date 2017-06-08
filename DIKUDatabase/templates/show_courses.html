@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_course') }}" method=post class=add-entries>
+      <dl>
+        <dt>Title:
+	<dd><input type=text size=30 name=name>
+	<dt>Total_hours:
+	<dd><input type=number name=Total_hours>
+	<dd><input type=submit value=Create>
+      </dl>
+  {% endif %}
+  <ul class=courses>
+  {% for course in courses %}
+    <li><h2 class=courses>{{ course.name }}</h2>{{ course.Total_hours }}
+  {% else %}
+    <li><em>Unbelievable.  No courses here so far</em>
+  {% endfor %}
+  </ul>
+  {% endblock %}

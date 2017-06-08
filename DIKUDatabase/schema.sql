@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS course;
+DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS teaches;
 DROP TABLE IF EXISTS roles;
 
-create table course (
+create table courses (
 	CourseID integer primary key autoincrement,
 	name text not null,
 	Total_hours integer not null
@@ -22,7 +22,7 @@ create table teaches (
 	CourseID integer not null,	
 	UserID integer not null,
 	FOREIGN KEY(UserID) REFERENCES users(UserID),
-	FOREIGN KEY(CourseID) REFERENCES course(CourseID)
+	FOREIGN KEY(CourseID) REFERENCES courses(CourseID)
 );
 
 create table roles (
