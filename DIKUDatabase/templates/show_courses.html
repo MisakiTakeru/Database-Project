@@ -10,11 +10,22 @@
 	<dd><input type=submit value=Create>
       </dl>
   {% endif %}
-  <ul class=courses>
+  <ul>
+  <table>
+  <tr>
+    <th> CourseID </th>
+    <th> Course </th>
+    <th> Total hours </th>
+  </tr>
   {% for course in courses %}
-    <li><h2 class=courses>{{ course.name }}</h2>{{ course.Total_hours }}
+    <tr>
+      <td>{{ course.CourseID }}</td>
+      <td>{{ course.name }}</td>
+      <td>{{ course.Total_hours }}</td>
+    </tr>
   {% else %}
     <li><em>Unbelievable.  No courses here so far</em>
   {% endfor %}
+  </table>
   </ul>
   {% endblock %}

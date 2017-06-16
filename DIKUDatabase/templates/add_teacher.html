@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('teach') }}" method=post class=add-entries>
+	<dl>
+          <select name="Users">
+          {% for user in users %}
+            <dd><option value="{{ user.UserID }}" name=UserID>{{ user.name }}</option>
+          {% endfor %}
+	  </select>
+	  <dt>CourseID:
+  	  <dd><input type=number name=CourseID>
+	  <dt>Hours:
+          <dd><input type=number name=hours> 
+	  <dd><input type=submit value=submit>
+	</dl>
+    </form>
+  {% endif %}
+
+  <ul class=entries>
+  {% for teach in teaches %}
+    <li><h2>{{ teach.UserID }}
+  {% else %}
+    <li><em>Unbelievable.  No teachers here so far</em>
+  {% endfor %}
+  </ul>
+
+{% endblock %}

@@ -11,6 +11,7 @@
   {% endif %}
   <a href="{{ url_for('show_users') }}">Users</a>
   <a href="{{ url_for('show_courses') }}">Courses</a>
+  <a href="{{ url_for('add_teacher') }}">add teacher</a>
   </div>
   {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>

@@ -101,19 +101,19 @@ def teach():
 	if not session.get('logged_in'):
 		abort(401)
 	db = get_db()
-	db.execute("""'insert into teaches (hours,Uid,Cid) values (?,?,?)',
-	[request.form['hours'], request.form['Uid'], request.form['Cid']]""")
+	db.execute('insert into teaches (UserID,CourseID,hours) values (?,?,?)',
+	[request.form['UserID'], request.form['CourseID'], request.form['hours']])
 	db.commit()
 	flash('user successfully added to course')
-# need a return statement not sure what yet
+	return redirect(url_for('add_teacher'))
 
 @app.route('/add_r', methods=['POST'])
 def add_role():
 	if not session.get('logged_in'):
 		abort(401)
 	db = get_db()
-	db.execute("""'insert into roles (roles,hours,Uid) values (?,?,?)',
-	[request.form['roles'], request.form['hours'], request.form['Uid']]""")
+	db.execute('insert into roles (roles,Hours,UserID) values (?,?,?)',
+	[request.form['roles'], request.form['Hours'], request.form['UserID']])
 	db.commit()
 	flash('role successfully added to User')
 	return redirect(url_for('show_roles'))
@@ -133,3 +133,17 @@ def show_users():
 	users = show.fetchall()
 	return render_template('show_users.html', users=users)
 
+@app.route('/add_teacher')
+def add_teacher():
+	db = get_db()
+	users = db.execute('select * from users order by UserID desc')
+	users = users.fetchall()
+	teach = db.execute('select * from teaches')
+	teach = teach.fetchall()
+	return render_template('add_teacher.html', users=users, teach=teach)
+
+# user profiles
+#@app.route('/users/<name>')
+#def user(name):
+#	db = get_db()
+#	user = db.execute('select * from users where name=name)
