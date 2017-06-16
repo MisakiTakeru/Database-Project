@@ -3,11 +3,15 @@
   {% if session.logged_in %}
     <form action="{{ url_for('teach') }}" method=post class=add-entries>
 	<dl>
-          <select name="Users">
+          <select name='UserID'>
           {% for user in users %}
-            <dd><option value="{{ user.UserID }}" name=UserID>{{ user.name }}</option>
+            <dd><option value="{{ user.UserID }}">{{ user.name }}</option>
           {% endfor %}
 	  </select>
+<!--
+	  <dt>UserID:
+	  <dd><input type=number name=UserID>
+-->
 	  <dt>CourseID:
   	  <dd><input type=number name=CourseID>
 	  <dt>Hours:

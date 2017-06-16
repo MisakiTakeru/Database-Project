@@ -143,7 +143,8 @@ def add_teacher():
 	return render_template('add_teacher.html', users=users, teach=teach)
 
 # user profiles
-#@app.route('/users/<name>')
-#def user(name):
-#	db = get_db()
-#	user = db.execute('select * from users where name=name)
+@app.route('/users/<name>')
+def user(name):
+	db = get_db()
+	user = db.execute('select * from users where name=name')
+	return render_template('user.html', user=name)
