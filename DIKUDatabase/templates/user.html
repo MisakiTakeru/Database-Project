@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <h1>User: {{ name }} </h1>
+
+
+  <table>
+  <tr>
+    <th> UserID </th>
+    <th> Course </th>
+    <th> hours </th>
+  </tr>
+  {% set amounts = 0 %}
+  {% for teacher in teach %}
+    {% if name == teacher.uname %}
+      <tr>
+      <td>{{ teacher.uname }}</td>
+      <td>{{ teacher.cname }}</td>
+      <td>{{ teacher.hours }}</td>
+      </tr>
+      
+    {% endif %}
+    {% set amounts = amounts + teacher.hours %}
+  {% endfor %}
+  {{ amounts }}
+  </table>
+{% endblock %}

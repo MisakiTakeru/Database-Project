@@ -8,25 +8,40 @@
             <dd><option value="{{ user.UserID }}">{{ user.name }}</option>
           {% endfor %}
 	  </select>
+          <select name='CourseID'>
+          {% for course in courses %}
+            <dd><option value="{{ course.CourseID }}">{{ course.name }}</option>
+          {% endfor %}
 <!--
 	  <dt>UserID:
 	  <dd><input type=number name=UserID>
--->
+
 	  <dt>CourseID:
   	  <dd><input type=number name=CourseID>
+-->
 	  <dt>Hours:
           <dd><input type=number name=hours> 
 	  <dd><input type=submit value=submit>
 	</dl>
     </form>
   {% endif %}
-
   <ul class=entries>
-  {% for teach in teaches %}
-    <li><h2>{{ teach.UserID }}
+  <table>
+  <tr>
+    <th> User </th>
+    <th> Course </th>
+    <th> hours </th>
+  </tr>
+  {% for teacher in teach %}
+    <tr>
+    <td>{{ teacher.uname }}</td>
+    <td>{{ teacher.cname }}</td>
+    <td>{{ teacher.hours }}</td>
+    </tr>
   {% else %}
     <li><em>Unbelievable.  No teachers here so far</em>
   {% endfor %}
+  </table>
   </ul>
 
 {% endblock %}

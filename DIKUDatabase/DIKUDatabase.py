@@ -138,13 +138,17 @@ def add_teacher():
 	db = get_db()
 	users = db.execute('select * from users order by UserID desc')
 	users = users.fetchall()
-	teach = db.execute('select * from teaches')
+	teach = db.execute('select users.name as uname, courses.name as cname, teaches.hours from teaches join users on users.UserID = teaches.UserID join courses on courses.CourseID = teaches.CourseID')
 	teach = teach.fetchall()
-	return render_template('add_teacher.html', users=users, teach=teach)
+	courses = db.execute('select * from courses order by CourseID desc')
+	courses = courses.fetchall()
+	return render_template('add_teacher.html', users=users, teach=teach, courses = courses)
 
 # user profiles
-@app.route('/users/<name>')
-def user(name):
+@app.route('/users/<UID>/<name>')
+def user(UID, name):
 	db = get_db()
-	user = db.execute('select * from users where name=name')
-	return render_template('user.html', user=name)
+#	teach = db.execute('select * from teaches where teaches.UserID = UID')
+	teach = db.execute('select users.name as uname, courses.name as cname, teaches.hours from teaches join users on users.UserID = teaches.UserID join courses on courses.CourseID = teaches.CourseID')
+	amount = 0
+	return render_template('user.html', UID=UID, name=name, teach=teach, amount = amount)
