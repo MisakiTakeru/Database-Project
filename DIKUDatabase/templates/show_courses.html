@@ -20,7 +20,7 @@
   {% for course in courses %}
     <tr>
       <td>{{ course.CourseID }}</td>
-      <td>{{ course.name }}</td>
+      <td><a href="{{ url_for('course', CID = course.CourseID) }}"> {{ course.name }}</a></td>
       <td>{{ course.Total_hours }}</td>
     </tr>
   {% else %}

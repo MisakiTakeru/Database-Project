@@ -1,23 +1,22 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <h1>User: {{ user.name }} </h1>
+  <h1>User: {{ course.name }} </h1>
 
 
   <table>
   <tr>
-    <th> Course </th>
+    <th> User </th>
     <th> hours </th>
   </tr>
   {% for teacher in teach %}
       <tr>
-      <td>{{ teacher.cname }}</td>
+      <td>{{ teacher.name }}</td>
       <td>{{ teacher.hours }}</td>
       </tr>
    
   {% endfor %}
   Total hours: 
-
-    {{ hi.total }}
+    {{ sum.total }}
   </table>
 {% endblock %}

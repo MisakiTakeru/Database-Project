@@ -145,10 +145,36 @@ def add_teacher():
 	return render_template('add_teacher.html', users=users, teach=teach, courses = courses)
 
 # user profiles
-@app.route('/users/<UID>/<name>')
-def user(UID, name):
+@app.route('/users/<UID>')
+def user(UID):
 	db = get_db()
-#	teach = db.execute('select * from teaches where teaches.UserID = UID')
-	teach = db.execute('select users.name as uname, courses.name as cname, teaches.hours from teaches join users on users.UserID = teaches.UserID join courses on courses.CourseID = teaches.CourseID')
-	amount = 0
-	return render_template('user.html', UID=UID, name=name, teach=teach, amount = amount)
+	teach = db.execute('select users.name as uname, courses.name as cname, teaches.hours from teaches join users on users.UserID = teaches.UserID join courses on courses.CourseID = teaches.CourseID where teaches.UserID = ?', [UID])
+	hi = db.execute('select sum(hours) as total from teaches where teaches.UserID=?',[UID])
+	hi = hi.fetchone()
+	user = db.execute('select name from users where users.UserID = ?',[UID])
+	user = user.fetchone()
+	return render_template('user.html', UID=UID, teach=teach, hi=hi, user=user)
+
+# course site
+@app.route('/courses/<CID>')
+def course(CID):
+	db = get_db()
+	teach = db.execute('select users.name, teaches.hours from teaches join users on users.UserID = teaches.UserID where teaches.CourseID = ?', [CID])
+	teach = teach.fetchall()
+	course = db.execute('select name from courses where courses.CourseID = ?', [CID])
+	course = course.fetchone()
+	sum = db.execute('select sum(hours) as total from teaches where teaches.CourseID = ?',[CID])
+	sum = sum.fetchone() 
+	return render_template('course.html', CID=CID, teach=teach, course=course, sum=sum)
+
+# big schema
+@app.route('/schema')
+def schema():
+	db = get_db()	
+	teach = db.execute('select users.name as uname, courses.name as cname, teaches.hours, users.UserID, courses.CourseID from teaches join users on users.UserID = teaches.UserID join courses on courses.CourseID = teaches.CourseID')
+	teach = teach.fetchall()
+	course = db.execute('select name from courses')
+	course = course.fetchall()
+	user = db.execute('select name, UserID from users')
+	user = user.fetchall()
+	return render_template('schema.html', teach=teach, course=course, user=user)

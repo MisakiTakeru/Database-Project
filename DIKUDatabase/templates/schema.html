@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+  <table>
+  <tr>
+    <th></th>
+    {% for courses in course %}
+      <th>{{ courses.name }}</td>
+    {% endfor %}
+    <th> hours </th>
+  </tr>
+  {% for users in user %}
+    <tr>
+    <td>{{ users.name }}</td>
+    {% for courses in course %}
+      {% for teacher in teach %}
+        {% if users.name == teacher.uname and courses.name == teacher.cname %}
+	  <td> {{ teacher.hours }}</td>
+	{% elif teacher.cname == courses.name %}
+	  <td></td>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    </tr>
+  {% endfor %}
+{% endblock %}
